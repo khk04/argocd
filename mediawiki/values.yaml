@@ -89,12 +89,12 @@ hostAliases:
 ## @param mediawikiUser User of the application
 ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mediawiki#environment-variables
 ##
-mediawikiUser: user
+mediawikiUser: juxtagene
 ## @param mediawikiPassword Application password
 ## Defaults to a random 10-character alphanumeric string if not set
 ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mediawiki#environment-variables
 ##
-mediawikiPassword: ""
+mediawikiPassword: "juxtagene"
 ## @param mediawikiSecret Existing `Secret` containing the password for the `mediawikiUser` user; must contain the key `mediawiki-password` and optional key `smtp-password`
 ## Mutually exclusive with `mediawikiPassword`
 ##
@@ -102,11 +102,11 @@ mediawikiSecret: ""
 ## @param mediawikiEmail Admin email
 ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mediawiki#environment-variables
 ##
-mediawikiEmail: user@example.com
+mediawikiEmail: juxtagene@juxtagene.com
 ## @param mediawikiName Name for the wiki
 ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mediawiki#environment-variables
 ##
-mediawikiName: My Wiki
+mediawikiName: 젝사젠 위키
 ## @param mediawikiHost Mediawiki host to create application URLs
 ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mediawiki#configuration
 ##
@@ -410,7 +410,7 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass: ""
+  storageClass: "rook-cephfs"
   ## @param persistence.existingClaim An Existing PVC name for MediaWiki volume
   ## Requires persistence.enabled: true
   ## If defined, PVC must be created manually before volume will be bound
@@ -454,7 +454,7 @@ service:
   ## @param service.type Kubernetes Service type
   ## For minikube, set this to NodePort, elsewhere use LoadBalancer
   ##
-  type: LoadBalancer
+  type: ClusterIP
   ## @param service.ports.http Service HTTP port
   ## @param service.ports.https HTTPS Port. Set this to any value (recommended: 443) to enable the https service port
   ##
@@ -514,7 +514,7 @@ service:
 ingress:
   ## @param ingress.enabled Set to true to enable ingress record generation
   ##
-  enabled: false
+  enabled: true
   ## DEPRECATED: Use ingress.annotations instead of ingress.certManager
   ## certManager: false
   ##
@@ -527,7 +527,7 @@ ingress:
   apiVersion: ""
   ## @param ingress.hostname Default host for the ingress resource
   ##
-  hostname: mediawiki.local
+  hostname: wiki.juxtagene.com
   ## @param ingress.path The Path to Mediawiki. You may need to set this to '/*' in order to use this with ALB ingress controllers.
   ##
   path: /
@@ -538,9 +538,10 @@ ingress:
   ## ref: https://cert-manager.io/docs/usage/ingress/#supported-annotations
   ##
   ## e.g:
-  ## annotations:
-  ##   kubernetes.io/ingress.class: nginx
-  ##   cert-manager.io/cluster-issuer: cluster-issuer-name
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letencrypt-prod-mediawiki"
+    cert-manager.io/acme-challenge-type: http01
   ##
   annotations: {}
   ## @param ingress.tls Enable TLS configuration for the hostname defined at ingress.hostname parameter
@@ -618,7 +619,7 @@ mariadb:
   enabled: true
   ## @param mariadb.architecture MariaDB architecture (`standalone` or `replication`)
   ##
-  architecture: standalone
+  architecture: Replication
   ## MariaDB Authentication parameters
   ##
   auth:
@@ -656,7 +657,7 @@ mariadb:
       ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
       ##   GKE, AWS & OpenStack)
       ##
-      storageClass: ""
+      storageClass: "rook-ceph-block"
       accessModes:
         - ReadWriteOnce
       size: 8Gi
