@@ -619,7 +619,7 @@ mariadb:
   enabled: true
   ## @param mariadb.architecture MariaDB architecture (`standalone` or `replication`)
   ##
-  architecture: Replication
+  architecture: replication
   ## MariaDB Authentication parameters
   ##
   auth:
