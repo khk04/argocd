@@ -311,7 +311,7 @@ mariadb:
       accessModes:
       - ReadWriteOnce
       annotations: {}
-      enabled: true
+      enabled: false
       existingClaim: ""
       hostPath: ""
       labels: {}
@@ -454,7 +454,7 @@ mariadb:
       accessModes:
       - ReadWriteOnce
       annotations: {}
-      enabled: true
+      enabled: false
       labels: {}
       selector: {}
       size: 8Gi
@@ -597,7 +597,7 @@ persistence:
   accessModes:
   - ReadWriteMany
   annotations: {}
-  enabled: true
+  enabled: false
   existingClaim: ""
   size: 8Gi
   storageClass: rook-cephfs
