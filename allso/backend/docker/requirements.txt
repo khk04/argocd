@@ -1,0 +1,8 @@
+fastapi[standard]
+uvicorn
+xmltodict
+jsons
+numpy
+python-ipmi
+paramiko==2.10.4
+websockets
