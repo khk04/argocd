@@ -58,7 +58,7 @@ spec:
             containerPort: 80
           env:
           - name: REGISTRY_URL
-            value: "https://docker.juxtagene.com"
+            value: "https://az.docker.juxtagene.com"
           - name: DELETE_IMAGES
             value: "true"
           - name: SINGLE_REGISTRY
@@ -70,5 +70,3 @@ spec:
             requests:
               cpu: "0.1"
               memory: "128Mi"
-      imagePullSecrets:
-      - name: dockerhub-registry-creds
