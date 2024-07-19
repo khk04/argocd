@@ -17,9 +17,9 @@ spec:
         app: docker-registry-service
     spec:
       volumes:
-      - name: registry-data-volume
-        persistentVolumeClaim: 
-          claimName: docker-storage-pvc
+      # - name: registry-data-volume
+      #   persistentVolumeClaim: 
+      #     claimName: docker-storage-pvc
       - name: htpasswd-volume
         configMap:
           name: htpasswd-volume-cm
