@@ -1,5 +1,5 @@
 # kustomization.yaml
-namespace: monitor
+namespace: default
 resources:
   - deployment.yaml
   - service.yaml

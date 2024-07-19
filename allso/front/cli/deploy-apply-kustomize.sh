@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-NAME_SPACE="monitor"
+NAME_SPACE="default"
 DEPLOY_TYPE="apply"
 
 set -Eeuo pipefail
@@ -15,7 +15,4 @@ echo ""
 echo " ${NAME_SPACE} ${DEPLOY_TYPE} ..."
 echo ""
 
-KUBE_CONFIG="$HOME/.kube/config-olaf"
-
-
-kubectl  ${DEPLOY_TYPE} -n ${NAME_SPACE} -k ../kustomize/
+kubectl --kubeconfig /Users/khk/work/juxtagene/quickstart/rancher/azure/kube_config_workload.yaml ${DEPLOY_TYPE} -n ${NAME_SPACE} -k ../kustomize/
