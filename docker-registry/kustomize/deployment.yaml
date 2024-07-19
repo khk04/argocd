@@ -40,8 +40,8 @@ spec:
             - name: docker-port
               containerPort: 5000
           volumeMounts:
-          - mountPath: /var/lib/registry
-            name: registry-data-volume
+          # - mountPath: /var/lib/registry
+          #   name: registry-data-volume
           - mountPath: /auth
             name: htpasswd-volume
           resources:
