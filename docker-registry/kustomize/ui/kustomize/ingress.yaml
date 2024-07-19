@@ -6,7 +6,7 @@ metadata:
   namespace: docker
 spec:
   rules:
-  - host: docker.juxtagene.com
+  - host: az.docker.juxtagene.com
     http:
       paths:
       - backend:
@@ -15,5 +15,5 @@ spec:
         path: /ui
   tls:
   - hosts:
-    - docker.juxtagene.com
+    - az.docker.juxtagene.com
     secretName: docker-juxtagene-com-tls 
