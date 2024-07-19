@@ -1,0 +1,17 @@
+# service for docker repo
+apiVersion: v1
+kind: Service
+metadata:
+  name: docker-registry-service
+  namespace: docker
+  labels:
+    app: docker-registry-service
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: docker-registry-service
+  sessionAffinity: None
+  type: ClusterIP

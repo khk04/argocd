@@ -1,0 +1,35 @@
+# deployment for docker repo
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-registry-ui
+  namespace: docker
+  labels:
+    app: docker-registry-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docker-registry-ui
+  template:
+    metadata:
+      labels:
+        app: docker-registry-ui
+    spec:
+      containers:
+        - name: docker-registry-ui
+          image: parabuzzle/craneoperator:latest
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: REGISTRY_HOST
+            value: "docker.juxtagene.com"
+          - name: REGISTRY_PORT
+            value: "443"
+          - name: REGISTRY_PROTOCOL
+            value: "https"
+          - name: SSL_VERIFY
+            value: "false"
+          - name: ALLOW_REGISTRY_LOGIN
+            value: "true"
+          ports:
+            - containerPort: 80
