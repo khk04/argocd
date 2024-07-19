@@ -8,4 +8,4 @@ resources:
   - service.yaml
   - configmap.yaml
   - issuer.yaml
-  - pvc.yaml
+#  - pvc.yaml
