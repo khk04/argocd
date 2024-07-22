@@ -1,5 +1,5 @@
 # kustomization.yaml
-namespace: default
+namespace: allso
 resources:
   - deployment.yaml
   - service.yaml
