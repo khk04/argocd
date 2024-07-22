@@ -2,19 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
-  namespace: monitor
+  namespace: allso
 spec:
   replicas: 1
   selector:
     matchLabels:
-      workload.user.cattle.io/workloadselector: frontend-monitor
+      app: frontend
   strategy:
     type: Recreate
   template:
     metadata:
       creationTimestamp: null
       labels:
-        workload.user.cattle.io/workloadselector: frontend-monitor
+        app: frontend
     spec:
       initContainers:
       - name: init-job
