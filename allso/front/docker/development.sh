@@ -63,14 +63,14 @@ fi
 
 echo "선택된 디렉토리: $selected_directory"
 
-docker-compose build seegene-services-frontend-olaf-monitor-dev
+docker-compose build allso-services-frontend-monitor-dev
 
 docker run \
-  --name seegene-services-frontend-olaf-monitor-dev \
+  --name allso-services-frontend-monitor-dev \
   -ti \
   --rm \
   -v ${selected_directory}:/app \
-  -p 8080:8080 \
+  -p 8085:8080 \
   --workdir /app/ \
-  services/seegene-frontend-olaf-monitor-dev:latest \
+  services/allso-frontend-monitor-dev:latest \
   bash -c 'yarn install; yarn serve'
