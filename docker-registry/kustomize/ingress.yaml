@@ -29,7 +29,7 @@ spec:
               number: 5000
   tls:
   - hosts:
-    - daz.ocker.juxtagene.com
+    - az.docker.juxtagene.com
     secretName: docker-juxtagene-com-tls
 ---
 apiVersion: networking.k8s.io/v1
