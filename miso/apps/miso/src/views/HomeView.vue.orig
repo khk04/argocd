@@ -1,0 +1,348 @@
+<template>
+  <div class="home">
+    <v-layout class="rounded rounded-md">
+      <v-app-bar color="blue-darken-4 px-2" density="compact">
+        <v-app-bar-title class="text-left">Seegene</v-app-bar-title>
+        <v-spacer></v-spacer>
+        <v-btn @click="handleLogout">Logout</v-btn>
+      </v-app-bar>
+
+      <v-navigation-drawer class="pa-0">
+        <v-list>
+          <v-list-item class="text-left">
+            <docker-images
+              :images="images"
+              @selectImageEvent="handleChildClick"
+            ></docker-images>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+
+      <v-navigation-drawer location="right" class="pa-0">
+        <v-list>
+          <v-list-item title="작업 현황"></v-list-item>
+        </v-list>
+        <jab-state :items="items"></jab-state>
+
+        <!-- <v-btn
+          :disabled="loading"
+          :loading="loading"
+          block
+          class="text-none mt-1"
+          color="indigo-darken-3"
+          size="x-large"
+          variant="flat"
+          @click="run"
+        >
+          실행
+        </v-btn> -->
+
+        <div class="text-center">
+          <v-btn
+            :disabled="loading"
+            :loading="loading"
+            block
+            class="text-none mt-1"
+            color="indigo-darken-3"
+            size="x-large"
+            variant="flat"
+            @click="dialog = true"
+          >
+            실행
+          </v-btn>
+
+          <v-dialog v-model="dialog" width="auto">
+            <v-card>
+              <v-card-text>
+                <v-table>
+                  <thead>
+                    <tr>
+                      <th class="text-left">Name</th>
+                      <th class="text-left">Calories</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(value, key) in hpc_data" :key="key">
+                      <td>{{ key }}</td>
+                      <td>
+                        <div
+                          v-if="
+                            key !== 'resource_cpu' && key !== 'resource_mem'
+                          "
+                        >
+                          {{ value }}
+                        </div>
+                        <v-row v-else>
+                          <v-col class="v-col-2 pt-9">{{ value }}</v-col>
+                          <v-col class="v-col-10 pt-7">
+                            <v-slider
+                              v-if="key === 'resource_cpu'"
+                              v-model="hpc_data['resource_cpu']"
+                              append-icon="mdi-plus"
+                              prepend-icon="mdi-minus"
+                              :min="0"
+                              :max="30"
+                              :step="1"
+                              thumb-label
+                            ></v-slider>
+                            <v-slider
+                              v-if="key === 'resource_mem'"
+                              v-model="hpc_data['resource_mem']"
+                              append-icon="mdi-plus"
+                              prepend-icon="mdi-minus"
+                              :min="0"
+                              :max="200000"
+                              :step="1"
+                              thumb-label
+                            ></v-slider>
+                          </v-col>
+                        </v-row>
+                      </td>
+                    </tr>
+                  </tbody>
+                </v-table>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="grey" @click="close">닫기</v-btn>
+                <v-btn color="primary" @click="run">실행</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
+
+        <v-btn
+          block
+          class="text-none mt-1"
+          color="grey-darken-3"
+          size="x-large"
+          variant="flat"
+        >
+          종료
+        </v-btn>
+      </v-navigation-drawer>
+
+      <v-main class="d-flex align-center justify-center">
+        <v-row no-gutters class="flex-nowrap bg-surface-variant">
+          <v-col cols="5" class="flex-grow-0 flex-shrink-0">
+            <v-list lines="two" class="height-element">
+              <v-list-item
+                class="text-left"
+                v-for="(value, key) in hpc_data"
+                :key="key"
+                :title="key + ' :'"
+                :subtitle="value"
+              ></v-list-item>
+            </v-list>
+          </v-col>
+          <v-col cols="7" class="flex-grow-0 flex-shrink-0">
+            <console-log></console-log>
+          </v-col>
+        </v-row>
+      </v-main>
+    </v-layout>
+  </div>
+</template>
+
+<script>
+import { mapGetters, mapActions } from "vuex";
+
+// @ is an alias to /src
+import DockerImages from "@/components/DockerImages.vue";
+import ConsoleLog from "@/components/ConsoleLog.vue";
+import JabState from "@/components/JabState.vue";
+
+export default {
+  name: "HomeView",
+  components: {
+    DockerImages,
+    ConsoleLog,
+    JabState,
+  },
+  data: () => ({
+    loading: false,
+    logoutInProgress: false,
+    selectImage: null,
+    runState: null,
+
+    intervalId: null,
+    dialog: false,
+    // items: [
+    //   { name: "ksskor/test1:0.1", id: 1 },
+    //   { name: "ksskor/test1:0.2", id: 2 },
+    //   { name: "ksskor/test1:0.3", id: 3 },
+    // ],
+    items: [],
+    checkStatus: null,
+    hpc_data: {
+      topic_name: "Job_control",
+      user_name: "test user01",
+      resource_node: 1,
+      resource_cpu: 15,
+      resource_mem: "100000mb",
+      job_name: "a1032_multiTom_en4_23",
+      job_cmd: [
+        "docker container run -i ",
+        "-v /seegene/result/multiTOM/$HOSTNAME:/app/res ",
+        "--net=host ",
+        "docker.seegene.com/multitom-ci-cd:latest",
+      ],
+      outfile_path: "/seegene/logs/pbs/out/",
+      cmd: "job_run",
+      docker_image: "",
+    },
+  }),
+  created() {
+    this.getImages("services");
+  },
+  watch: {
+    loading(val) {
+      if (!val) return;
+      setTimeout(() => (this.loading = false), 2000);
+    },
+  },
+  computed: {
+    ...mapGetters({
+      // images: "docker/images",
+      status: "kafka/status",
+    }),
+    images() {
+      return this.$store.state.docker.images;
+    },
+    status() {
+      return this.$store.state.kafka.status;
+    },
+  },
+  methods: {
+    ...mapActions({
+      logout: "auth/logout", // 'auth/logout' 액션을 'logout' 메서드로 매핑합니다.
+      getImages: "docker/getImages",
+      sendKafkaTopic: "kafka/sendKafkaTopic",
+      getLog: "kafka/getLog",
+      getStatus: "kafka/getStatus",
+    }),
+    async handleLogout() {
+      if (this.logoutInProgress) {
+        return;
+      }
+
+      this.logoutInProgress = true;
+
+      try {
+        // 로그아웃을 시도합니다.
+        await this.logout();
+
+        // 로그아웃이 성공한 경우에는 홈 화면으로 이동하도록 설정합니다.
+        this.$router.push({ path: "/login" });
+      } catch (error) {
+        // 로그아웃 도중 에러가 발생한 경우 에러 메시지를 표시하거나 적절한 액션을 취합니다.
+        console.error("로그아웃 도중 에러가 발생했습니다.", error);
+      }
+    },
+    uniqueNameGen(image) {
+      const date = new Date();
+      const year = date.getFullYear().toString().slice(-2);
+      let month = (date.getMonth() + 1).toString().padStart(2, "0");
+      let day = date.getDate().toString().padStart(2, "0");
+      const randomNum = Math.floor(Math.random() * 1000)
+        .toString()
+        .padStart(3, "0");
+      const uniqueName = `${year}${month}${day}_${
+        image.split("/")[1].split(":")[0]
+      }_${randomNum}`;
+      this.hpc_data.job_name = uniqueName;
+    },
+    jobcommandGen() {
+      let uniqueName = this.hpc_data.job_name;
+      const resultDir = `-v /seegene/result/${uniqueName}/$HOSTNAME:/app/res `;
+      const tmp_job_cmd = [
+        "docker run --tty  ",
+        resultDir,
+        "--net=host ",
+        this.hpc_data.docker_image,
+      ];
+      this.hpc_data.job_cmd = tmp_job_cmd;
+    },
+    handleChildClick(image) {
+      this.runState = false;
+      this.selectImage = image;
+      this.hpc_data.docker_image = `dev-docker.seegene.com/${image}`;
+      this.items = [];
+      this.uniqueNameGen(this.hpc_data.docker_image);
+      this.jobcommandGen();
+    },
+    run() {
+      this.runState = true;
+      console.log(this.selectImage);
+      this.sendKafkaTopic(this.hpc_data);
+    },
+  },
+  mounted() {
+    this.intervalId = setInterval(() => {
+      //if (this.selectImage !== null) {
+      if (this.runState) {
+        let uniqueName = this.hpc_data.job_name;
+        this.getLog(uniqueName);
+        this.getStatus(uniqueName);
+
+        if (this.status.content === this.checkStatus) {
+          console.log(this.status);
+        } else {
+          this.checkStatus = this.status.content;
+          if (this.status.content === "job_summited" && this.items.length < 6) {
+            this.items.push({
+              time: this.status.timestamp,
+              status: "제출완료",
+              color: "green-darken-3",
+            });
+          }
+          if (this.status.content === "ready" && this.items.length < 6) {
+            this.items.push({
+              time: this.status.timestamp,
+              status: "사전준비완료",
+              color: "teal-darken-3",
+            });
+          }
+          if (this.status.content === "job_queued" && this.items.length < 6) {
+            this.items.push({
+              time: this.status.timestamp,
+              status: "자원대기중",
+              color: "cyan-darken-3",
+            });
+          }
+          if (this.status.content === "job_running" && this.items.length < 6) {
+            this.items.push({
+              time: this.status.timestamp,
+              status: "작업수행중",
+              color: "light-blue-darken-3",
+            });
+          }
+          if (this.status.content === "job_done" && this.items.length < 6) {
+            this.items.push({
+              time: this.status.timestamp,
+              status: "작업종료중",
+              color: "blue-darken-3",
+            });
+          }
+          if (this.status.content === "job_end" && this.items.length < 6) {
+            this.items.push({
+              time: this.status.timestamp,
+              status: "작업완료",
+              color: "indigo-darken-3",
+            });
+          }
+        }
+      }
+    }, 3000);
+  },
+  beforeUnmount() {
+    clearInterval(this.intervalId);
+  },
+};
+</script>
+
+<style scoped lang="scss">
+.height-element {
+  height: calc(100vh - 49px);
+}
+</style>

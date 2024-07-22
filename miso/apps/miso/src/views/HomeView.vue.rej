@@ -1,0 +1,12 @@
+--- seegene-front/apps/010-home-base/src/views/HomeView.vue
++++ seegene-front/apps/010-home-base/src/views/HomeView.vue
+@@ -271,8 +271,8 @@ export default {
+       this.hpc_data.docker_image = `dev-docker.seegene.com/${image}`;
+       this.uniqueNameGen(this.hpc_data.docker_image);
+       this.jobcommandGen();
+-      this.hpc_data.resource_node = 1;
+       this.hpc_data.resource_cpu = 15;
++      this.hpc_data.resource_mem = "100000mb";
+     },
+ 
+     run() {
