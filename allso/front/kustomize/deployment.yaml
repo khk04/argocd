@@ -16,14 +16,6 @@ spec:
       labels:
         app: frontend-allso
     spec:
-      initContainers:
-      - name: init-job
-        image: busybox
-        imagePullPolicy: IfNotPresent
-        args:
-          - /bin/sh
-          - -c
-          - ls -al 
       containers:
       - name: frontend-allso
         image: az.docker.juxtagene.com/services/allso-frontend-monitor:latest
