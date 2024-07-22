@@ -1,9 +1,11 @@
 # kustomization.yaml
-namespace: monitor
+namespace: allso
 resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
-#  - secret.yaml
-#  - pvc.yaml
+  - namespace.yaml
+  - issuer.yaml
+  - docker-registry-secret.yaml
+
 
