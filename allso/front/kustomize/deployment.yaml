@@ -8,11 +8,8 @@ spec:
   selector:
     matchLabels:
       app: frontend-allso
-  strategy:
-    type: Recreate
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: frontend-allso
     spec:
@@ -20,20 +17,10 @@ spec:
       - name: frontend-allso
         image: az.docker.juxtagene.com/services/allso-frontend-monitor:latest
         imagePullPolicy: Always
-        resources: {}
-        securityContext:
-          allowPrivilegeEscalation: false
-          privileged: false
-          readOnlyRootFilesystem: false
-          runAsNonRoot: false
         stdin: true
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         tty: true
-      dnsPolicy: ClusterFirst
       imagePullSecrets:
       - name: juxtagene-docker-registry
       restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
