@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: frontend-allso
   namespace: allso
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: frontend
+      app: frontend-allso
   strategy:
     type: Recreate
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: frontend
+        app: frontend-allso
     spec:
       initContainers:
       - name: init-job
@@ -25,7 +25,7 @@ spec:
           - -c
           - ls -al 
       containers:
-      - name: frontend
+      - name: frontend-allso
         image: az.docker.juxtagene.com/services/allso-frontend-monitor:latest
         imagePullPolicy: Always
         resources: {}
