@@ -14,7 +14,7 @@ spec:
   tls:
   - hosts:
     - az.allso.juxtagene.com
-    secretName: allso-juxtagene-com-tls
+    secretName: az-allso-juxtagene-com-tls
   rules:
   - host: az.allso.juxtagene.com
     http:
