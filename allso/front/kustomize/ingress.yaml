@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: frontend
-  namespace: monitor
+  namespace: allso
   annotations:
     nginx.org/websocket-services: "frontend"
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
