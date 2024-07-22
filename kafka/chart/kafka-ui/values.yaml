@@ -104,7 +104,7 @@ ingress:
 
   # Annotations for the Ingress
   annotations: 
-    cert-manager.io/issuer: letsencrypt-prod-kafka-ui
+    cert-manager.io/issuer: letsencrypt-prod-kafka
     cert-manager.io/acme-challenge-type: http01
 
   # ingressClassName for the Ingress
@@ -117,14 +117,14 @@ ingress:
   pathType: "Prefix"  
 
   # The hostname for the Ingress
-  host: "kafka.juxtagene.com"
+  host: "az.kafka.juxtagene.com"
 
   # configs for Ingress TLS
   tls:
     # Enable TLS termination for the Ingress
     enabled: true
     # the name of a pre-created Secret containing a TLS private key and certificate
-    secretName: "kafka-juxtagene-com-tls"
+    secretName: "az-kafka-juxtagene-com-tls"
 
   # HTTP paths to add to the Ingress before the default path
   precedingPaths: []
