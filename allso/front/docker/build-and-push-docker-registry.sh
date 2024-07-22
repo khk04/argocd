@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # 현재 디렉토리를 기준으로 상위 "apps" 디렉토리 경로를 찾음
 current_dir=$(pwd)
 apps_dir=""
@@ -38,28 +40,30 @@ if [[ ${#directories[@]} -eq 0 ]]; then
 fi
 
 echo "디렉토리 목록:"
-for ((i=0; i<${#directories[@]}; i++)); do
-    echo "$((i+1)). ${directories[i]}"
+for ((i = 0; i < ${#directories[@]}; i++)); do
+    echo "$((i + 1)). ${directories[i]}"
 done
 
 selected_directory=""
 while [[ -z "$selected_directory" ]]; do
     read -rp "번호로 선택할 디렉토리를 입력하세요: " selection
     if [[ "$selection" =~ ^[0-9]+$ ]] && ((selection > 0 && selection <= ${#directories[@]})); then
-        selected_directory="${directories[$((selection-1))]}"
+        selected_directory="${directories[$((selection - 1))]}"
     else
         echo "유효한 번호를 선택하세요."
     fi
 done
 
-
 echo "선택된 디렉토리: $selected_directory"
 
-# sed -i '' '/selected_directory=/{n;d;}'  .env
-sed -i "s/selected_directory=.*/selected_directory=/" .env
-sed -i "s/selected_directory=/selected_directory=${selected_directory//\//\\/}/g" .env
-
-
+# mac or linux
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i '' "s/selected_directory=.*/selected_directory=/" .env
+    sed -i '' "s/selected_directory=/selected_directory=${selected_directory//\//\\/}/g" .env
+else
+    sed -i "s/selected_directory=.*/selected_directory=/" .env
+    sed -i "s/selected_directory=/selected_directory=${selected_directory//\//\\/}/g" .env
+fi
 
 docker-compose up allso-services-frontend-monitor-build
 
