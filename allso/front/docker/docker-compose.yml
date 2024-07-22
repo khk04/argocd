@@ -3,17 +3,17 @@
 #
 version: '2'
 services:
-    seegene-services-frontend-olaf-monitor-dev:
+    allso-services-frontend-monitor-dev:
         build:
             context: ./development
             dockerfile: Dockerfile
-        image: services/seegene-frontend-olaf-monitor-dev:latest
+        image: services/allso-frontend-monitor-dev:latest
 
-    seegene-services-frontend-olaf-monitor-build:
+    allso-services-frontend-monitor-build:
         build:
             context: ./development
             dockerfile: Dockerfile
-        image: services/seegene-frontend-olaf-monitor-dev:latest
+        image: services/allso-frontend-monitor-dev:latest
         volumes:
           - ${selected_directory}:/app
         ports:
@@ -22,17 +22,17 @@ services:
         command: >
           bash -c "npm install --force && rm -rf /app/dist/ && npm run build"
 
-    seegene-services-frontend-olaf-monitor:
+    allso-services-frontend-monitor:
       build:
         context: ./deployment
         dockerfile: Dockerfile
-      image: services/seegene-frontend-olaf-monitor:latest
+      image: services/allso-frontend-monitor:latest
 
-    seegene-services-frontend-olaf-monitor-init:
+    allso-services-frontend-monitor-init:
         build:
             context: ./development
             dockerfile: Dockerfile
-        image: services/seegene-frontend-olaf-monitor-dev:latest
+        image: services/allso-frontend-monitor-dev:latest
         user: "${USER_ID}:${GROUP_ID}"
         volumes:
           - ${selected_directory}:/app
