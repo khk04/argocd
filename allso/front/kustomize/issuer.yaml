@@ -1,5 +1,5 @@
 apiVersion: cert-manager.io/v1
-kind: Certificate
+kind: issuer
 metadata:
   name: letsencrypt-prod-allso
   namespace: allso
