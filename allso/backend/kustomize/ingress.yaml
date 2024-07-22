@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: backend
-  namespace: monitor
+  namespace: allso
   annotations:
     nginx.org/websocket-services: "backend"
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
@@ -12,6 +12,9 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-origin: "https://az.allso.juxtagene.com,https://localhost:8080"
     nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, OPTIONS"
     nginx.ingress.kubernetes.io/cors-allow-headers: "Content-Type,Authorization"
+    cert-manager.k8s.io/cluster-issuer: letsencrypt-prod-allso-backend
+    cert-manager.io/acme-challenge-type: http01
+
 spec:
   rules:
   - host: az.allso-backend.juxtagene.com
@@ -27,5 +30,5 @@ spec:
   tls:
   - hosts:
     - az.allso-backend.juxtagene.com
-    secretName: allso-backend-juxtagene-com-tls
+    secretName: az-allso-backend-juxtagene-com-tls
 
