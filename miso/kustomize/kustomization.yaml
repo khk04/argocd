@@ -4,6 +4,6 @@ resources:
 - deployment.yaml
 - service.yaml
 - ingress.yaml
-- issuer.yaml
 - docker-registry.yaml
 - namespace.yaml
+- issuer.yaml
