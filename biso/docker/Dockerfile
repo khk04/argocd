@@ -15,7 +15,7 @@ RUN apt install -y libsasl2-dev libldap2-dev libssl-dev kmod wget ceph-common
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-ENV DATABASE_URL postgresql://insilico:qwer1234@postgresql.biso:5432/api-db
+ENV DATABASE_URL postgresql://juxtagene:qwer1234@postgresql.biso:5432/api-db
 
 COPY app /app
 COPY configfile/ceph.conf /etc/ceph/ceph.conf

@@ -22,8 +22,8 @@ app = FastAPI()
 origins = [
     "http://localhost:8080",
     "https://localhost:8080",
-    "https://miso.juxtagene.com",
-    "http://miso.juxtagene.com",
+    "https://az.miso.juxtagene.com",
+    "http://az.miso.juxtagene.com",
 ]
 
 app.add_middleware(
@@ -104,7 +104,7 @@ class DownloadFiletData(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"seegene": "backend api server"}
+    return {"juxtagene": "backend api server"}
 
 @app.post("/login")
 async def create_item(user: User, db=Depends(get_db)):
