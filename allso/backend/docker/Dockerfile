@@ -15,7 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app /app
 
-RUN chmod 0400 /app/azure-ssh-key/id_rsa
+# RUN chmod 0400 /app/azure-ssh-key/id_rsa
 
 EXPOSE 8000
 CMD [ "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000" ]
