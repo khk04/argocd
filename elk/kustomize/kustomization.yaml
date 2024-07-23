@@ -1,0 +1,5 @@
+namespace: elastic
+resources:
+  - deployment.yaml
+  - service.yaml
+  - clusterrole.yaml
