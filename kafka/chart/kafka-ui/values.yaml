@@ -43,7 +43,9 @@ yamlApplicationConfigConfigMap:
 existingSecret: ""
 envs:
   secret: {}
-  config: {}
+  config: 
+  KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+  KAFKA_CLUSTERS_0_NAME: local
 
 networkPolicy:
   enabled: false
