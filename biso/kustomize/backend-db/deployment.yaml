@@ -18,7 +18,7 @@ spec:
         image: sameersbn/postgresql:10
         env:
         - name: DB_USER
-          value: insilico
+          value: juxtagene
         - name: DB_PASS
           value: qwer1234
         - name: DB_NAME
