@@ -11,19 +11,18 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-prod-allso
     cert-manager.io/acme-challenge-type: http01
 spec:
-  tls:
-  - hosts:
-    - az.allso.juxtagene.com
-    secretName: az-allso-juxtagene-com-tls
   rules:
   - host: az.allso.juxtagene.com
     http:
       paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: frontend
-            port:
-              number: 80
-
+        - backend:
+            service:
+              name: frontend
+              port:
+                number: 80
+          path: /
+          pathType: Prefix
+  tls:
+  - hosts:
+    - az.allso.juxtagene.com
+    secretName: az-allso-juxtagene-com-tls
