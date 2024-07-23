@@ -95,8 +95,8 @@ hostAliases: []
 #  - "foo.local"
 #  - "bar.local"
 
-image: "docker.elastic.co/logstash/logstash"
-imageTag: "8.5.1"
+image: "opensearchproject/logstash-oss-with-opensearch-output-plugin"
+imageTag: "8.6.1"
 imagePullPolicy: "IfNotPresent"
 imagePullSecrets: []
 
