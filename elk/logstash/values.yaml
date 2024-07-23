@@ -32,9 +32,9 @@ logstashPipeline:
     }
     output {
         opensearch {
-          hosts => ["https://opensearch-cluster-master.elastic:9200"]
+          hosts => ["https://opensearch-cluster-master.elk:9200"]
           user => "admin"
-          password => "Seegene1!"
+          password => "Juxtagene1!"
           manage_template => false
           template_overwrite => true
           ssl_certificate_verification => false
