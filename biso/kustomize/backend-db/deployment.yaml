@@ -30,9 +30,9 @@ spec:
         ports:
         - name: postgres
           containerPort: 5432
-        volumeMounts:
-        - mountPath: /var/lib/postgresql
-          name: api-postgresql-app-pv
+        # volumeMounts:
+        # - mountPath: /var/lib/postgresql
+        #   name: api-postgresql-app-pv
         livenessProbe:
           exec:
             command:
@@ -53,7 +53,7 @@ spec:
             - postgres
           initialDelaySeconds: 5
           timeoutSeconds: 1
-      volumes:
-        - name: api-postgresql-app-pv
-          persistentVolumeClaim:
-            claimName: api-postgresql-app-pvc
+      # volumes:
+      #   - name: api-postgresql-app-pv
+      #     persistentVolumeClaim:
+      #       claimName: api-postgresql-app-pvc
