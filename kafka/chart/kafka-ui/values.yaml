@@ -42,10 +42,10 @@ yamlApplicationConfigConfigMap:
   # name: configMapName
 existingSecret: ""
 envs:
-  secret: {}
   config: 
-  KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
-  KAFKA_CLUSTERS_0_NAME: local
+    KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+    KAFKA_CLUSTERS_0_NAME: local
+  secret: {}
 
 networkPolicy:
   enabled: false
