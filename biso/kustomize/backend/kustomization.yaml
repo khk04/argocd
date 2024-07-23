@@ -1,7 +1,8 @@
 # kustomization.yaml
-namespace: allso
+namespace: biso
 resources:
 - deployment.yaml
 - service.yaml
 - ingress.yaml
 - issuer.yaml
+- docker-registry.yaml

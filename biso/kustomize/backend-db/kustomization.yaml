@@ -1,0 +1,5 @@
+# kustomization.yaml
+namespace: biso
+resources:
+- deployment.yaml
+- service.yaml

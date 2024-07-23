@@ -1,0 +1,10 @@
+#
+# 이 파일은 도커를 관리하는 파일입니다. 
+#
+version: '2'
+services:
+    biso-services-backend-api-server:
+        build:
+            context     : ./
+            dockerfile  : Dockerfile
+        image           : services/biso-backend-api-server:latest

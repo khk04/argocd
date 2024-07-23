@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: juxtagene-docker-registry
+  namespace: biso
+data:
+  .dockerconfigjson: >-
+    eyJhdXRocyI6eyJhei5kb2NrZXIuanV4dGFnZW5lLmNvbSI6eyJ1c2VybmFtZSI6Imp1eHRhZ2VuZSIsInBhc3N3b3JkIjoiMjAyM01heTAyIiwiYXV0aCI6ImFuVjRkR0ZuWlc1bE9qSXdNak5OWVhrd01nPT0ifX19
+type: kubernetes.io/dockerconfigjson

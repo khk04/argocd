@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: wisdom
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: backend-api-server
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: backend-api-server
+    spec:
+      initContainers:
+      - name: init-job
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        args:
+          - /bin/sh
+          - -c
+          - ls -al 
+      containers:
+      - name: backend
+        image: dev-docker.seegene.com/services/seegene-backend-api-server:latest
+        imagePullPolicy: Always
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          privileged: true
+          readOnlyRootFilesystem: false
+          runAsNonRoot: false
+          capabilities:
+            add:
+              - SYS_ADMIN
+              - DAC_READ_SEARCH
+              - NET_BIND_SERVICE
+        stdin: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        tty: true
+        volumeMounts:
+        - name: modules
+          mountPath: /lib/modules
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: insilico-docker-registry
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: modules
+        hostPath:
+          path: /lib/modules
