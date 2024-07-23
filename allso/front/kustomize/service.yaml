@@ -6,7 +6,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    workload.user.cattle.io/workloadselector: frontend-olaf-monitor
+    workload.user.cattle.io/workloadselector: frontend-monitor
   ports:
   - port: 80
     protocol: TCP
