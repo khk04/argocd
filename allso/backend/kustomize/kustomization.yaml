@@ -6,6 +6,3 @@ resources:
 - ingress.yaml
 - namespace.yaml
 - issuer.yaml
-- docker-registry-secret.yaml
-
-
