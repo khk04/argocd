@@ -6,7 +6,7 @@ cleanup() {
     trap - SIGINT SIGTERM ERR EXIT
     exit
 }
-DOCKER_REG="docker.juxtagene.com"
+DOCKER_REG="az.docker.juxtagene.com"
 DOCKER_PATH="service"
 DOCKER_REG_USER="juxtagene"
 DOCKER_REG_PASSWORD="2023May02"

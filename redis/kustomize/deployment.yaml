@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: kafka-redis-publisher-container
-        image: docker.juxtagene.com/services/kafka-redis-publisher:latest
+        image: az.docker.juxtagene.com/services/kafka-redis-publisher:latest
         env:
         - name: TZ
           value: Asia/Seoul
@@ -31,5 +31,3 @@ spec:
           value: "job_state"
       imagePullSecrets:
         - name: juxtagene-docker-registry
-
-
