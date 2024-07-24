@@ -1,5 +1,5 @@
 # kustomization.yaml
 namespace: redis
 resources:
-  - deployment.yaml
-  - docker-registry.yaml
+- deployment.yaml
+- docker-registry.yaml
