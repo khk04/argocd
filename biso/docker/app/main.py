@@ -195,7 +195,7 @@ async def send_to_elasticsearch(data: dict):
 
     log_data=''
     search_results=''
-    external_url = "https://opensearch-cluster-master.elastic:9200/pbs-job-exec*/_search"
+    external_url = "https://opensearch-cluster-master.elk:9200/pbs-job-exec*/_search"
     jobname= data.get('data')
     # print(data)
     request_data ={
@@ -234,7 +234,7 @@ async def send_to_elasticsearch(data: dict):
         }
     } 
     # HTTP POST 요청을 보내고 응답을 받습니다.
-    async with httpx.AsyncClient(verify=False, auth=('admin', 'Seegene1!')) as client:
+    async with httpx.AsyncClient(verify=False, auth=('admin', 'Juxtagene1!')) as client:
         response = await client.post(external_url, json=request_data)
 
 
@@ -262,7 +262,7 @@ async def send_to_elasticsearch(data: dict):
 
 @app.post("/jobstate")
 async def get_redis_jobstate(data: dict):
-    redis_client = redis.StrictRedis(host='job-redis-headless.redis', port=6379, db=0)
+    redis_client = redis.StrictRedis(host='redis-headless.redis', port=6379, db=0)
     current_time = datetime.now()
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
     state_list = ["job_summited","ready","job_queued","job_running","job_done","job_end"]

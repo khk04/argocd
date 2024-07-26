@@ -4,7 +4,7 @@ import redis
 
 
 def get_job_list(data):
-    external_url = "https://opensearch-cluster-master.elastic:9200/pbs-job-state*/_search"
+    external_url = "https://opensearch-cluster-master.elk:9200/pbs-job-state*/_search"
     request_data ={
         "size": 1000, 
         "_source": "job_name", 
@@ -37,7 +37,7 @@ def get_job_list(data):
             }
         }
     }
-    client = httpx.Client(verify=False, auth=('admin', 'Seegene1!'))
+    client = httpx.Client(verify=False, auth=('admin', 'Juxtagene1!'))
 
     response = client.post(external_url, json=request_data)
 
