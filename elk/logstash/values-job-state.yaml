@@ -16,72 +16,50 @@ logstashConfig: {}
 # Allows you to add any pipeline files in /usr/share/logstash/pipeline/
 ### ***warn*** there is a hardcoded logstash.conf in the image, override it first
 logstashPipeline:
-  logstach.conf: |
-    # all input will come from filebeat, no local logs
-    input {
-      kafka1 {
-        bootstrap_servers => "kafka.kafka:9092"
-        topics => ["Job_control","hpc_Job_control"]
-        group_id => "job-control"
-        enable_auto_commit => "true"
-        auto_offset_reset => "latest"
-        consumer_threads => 4
-        codec => "json"
-        decorate_events => true
-      }
-
-      kafka2 {
-        bootstrap_servers => "kafka.kafka:9092"
-        topics => ["Job_control","hpc_Job_control"]
-        group_id => "job-control"
-        enable_auto_commit => "true"
-        auto_offset_reset => "latest"
-        consumer_threads => 4
-        codec => "json"
-        decorate_events => true
-      }
-
-      kafka3 {
-        bootstrap_servers => "kafka.kafka:9092"
-        topics_pattern => "job_tmp_log"
-        group_id => "job-log"
-        enable_auto_commit => "true"
-        auto_offset_reset => "latest"
-        consumer_threads => 4
-        codec => "json"
-        decorate_events => true
-      }
+  logstash.conf: |
+  input {
+    kafka {
+      bootstrap_servers => "kafka.kafka:9092"
+      topics => ["Job_control", "hpc_Job_control", "job_tmp_log"]
+      group_id => "job-control"
+      enable_auto_commit => "true"
+      auto_offset_reset => "latest"
+      consumer_threads => 4
+      codec => "json"
+      decorate_events => true
     }
-    output {
-        opensearch1 {
-          hosts => ["https://opensearch-cluster-master.elk:9200"]
-          user => "admin"
-          password => "Juxtagene1!"
-          manage_template => false
-          template_overwrite => true
-          ssl_certificate_verification => false
-          index => "pbs-job-control-%{+YYYY-MM-dd}"
-        }
-        opensearch2 {
-          hosts => ["https://opensearch-cluster-master.elk:9200"]
-          user => "admin"
-          password => "juxtagene1!"
-          manage_template => false
-          template_overwrite => true
-          ssl_certificate_verification => false
-          index => "pbs-job-control-%{+YYYY-MM-dd}"
-        }
+  }
 
-        opensearch3 {
-          hosts => ["https://opensearch-cluster-master.elk:9200"]
-          user => "admin"
-          password => "Juxtagene1!"
-          manage_template => false
-          template_overwrite => true
-          ssl_certificate_verification => false
-          index => "pbs-job-exec-log-%{+YYYY-MM-dd}"
-        }
+  output {
+    opensearch {
+      hosts => ["https://opensearch-cluster-master.elk:9200"]
+      user => "admin"
+      password => "Juxtagene1!"
+      manage_template => false
+      template_overwrite => true
+      ssl_certificate_verification => false
+      index => "pbs-job-control-%{+YYYY-MM-dd}"
     }
+    opensearch {
+      hosts => ["https://opensearch-cluster-master.elk:9200"]
+      user => "admin"
+      password => "Juxtagene1!"
+      manage_template => false
+      template_overwrite => true
+      ssl_certificate_verification => false
+      index => "pbs-job-control-%{+YYYY-MM-dd}"
+    }
+    opensearch {
+      hosts => ["https://opensearch-cluster-master.elk:9200"]
+      user => "admin"
+      password => "Juxtagene1!"
+      manage_template => false
+      template_overwrite => true
+      ssl_certificate_verification => false
+      index => "pbs-job-exec-log-%{+YYYY-MM-dd}"
+    }
+  }
+
 #  logstash.conf: |
 #    input {
 #      exec {
