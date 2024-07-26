@@ -19,7 +19,18 @@ logstashPipeline:
   logstach.conf: |
     # all input will come from filebeat, no local logs
     input {
-      kafka {
+      kafka1 {
+        bootstrap_servers => "kafka.kafka:9092"
+        topics => ["Job_control","hpc_Job_control"]
+        group_id => "job-control"
+        enable_auto_commit => "true"
+        auto_offset_reset => "latest"
+        consumer_threads => 4
+        codec => "json"
+        decorate_events => true
+      }
+
+      kafka2 {
         bootstrap_servers => "kafka.kafka:9092"
         topics => ["Job_control","hpc_Job_control"]
         group_id => "job-control"
@@ -31,10 +42,19 @@ logstashPipeline:
       }
     }
     output {
-        opensearch {
+        opensearch1 {
           hosts => ["https://opensearch-cluster-master.elk:9200"]
           user => "admin"
           password => "Juxtagene1!"
+          manage_template => false
+          template_overwrite => true
+          ssl_certificate_verification => false
+          index => "pbs-job-control-%{+YYYY-MM-dd}"
+        }
+        opensearch2 {
+          hosts => ["https://opensearch-cluster-master.elk:9200"]
+          user => "admin"
+          password => "juxtagene1!"
           manage_template => false
           template_overwrite => true
           ssl_certificate_verification => false
