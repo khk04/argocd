@@ -693,7 +693,7 @@ export default {
           text: "작업을 수행하기 위한 환경 선택이 안되어 있습니다.",
         };
       } else if (data.selectImage === null) {
-        console.log("this.runImage === 'docker.juxtagene.com/null'");
+        console.log("this.runImage === 'az.docker.juxtagene.com/null'");
         console.log(this.runImage);
         this.alert = {
           view: true,
@@ -709,7 +709,7 @@ export default {
 
         this.job_status = { status: "", value: 0, color: "#E0E0E0" };
         this.$refs.consoleLogRef.clearTerminal();
-        this.hpc_data.docker_image = `docker.juxtagene.com/${this.selectImage}`;
+        this.hpc_data.docker_image = `az.docker.juxtagene.com/${this.selectImage}`;
         this.hpc_data.outfile_path = "/juxtagene/logs/pbs/out/";
         // this.uniqueNameGen(this.hpc_data.docker_image);
         this.uniqueNameGen();
@@ -786,7 +786,7 @@ export default {
 
       this.job_status = { status: "", value: 0, color: "#E0E0E0" };
       this.$refs.consoleLogRef.clearTerminal();
-      this.hpc_data.docker_image = `docker.juxtagene.com/${this.selectImage}`;
+      this.hpc_data.docker_image = `az.docker.juxtagene.com/${this.selectImage}`;
       this.hpc_data.outfile_path = "/juxtagene/logs/pbs/out/";
       this.hpc_data.job_state = "ready";
       // this.uniqueNameGen(this.hpc_data.docker_image);
