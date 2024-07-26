@@ -32,7 +32,7 @@ logstashPipeline:
     }
     output {
         opensearch {
-          hosts => ["https://opensearch-cluster-master.elk:9200"]
+          hosts => ["http://opensearch-cluster-master.elk:9200"]
           user => "admin"
           password => "juxtagene1!"
           manage_template => false
@@ -57,7 +57,7 @@ logstashPipeline:
     }
     output {
         opensearch {
-          hosts => ["https://opensearch-cluster-master.elk:9200"]
+          hosts => ["http://opensearch-cluster-master.elk:9200"]
           user => "admin"
           password => "Juxtagene1!"
           manage_template => false
@@ -82,7 +82,7 @@ logstashPipeline:
     }
     output {
         opensearch {
-          hosts => ["https://opensearch-cluster-master.elk:9200"]
+          hosts => ["http://opensearch-cluster-master.elk:9200"]
           user => "admin"
           password => "Juxtagene1!"
           manage_template => false
