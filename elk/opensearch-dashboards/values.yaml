@@ -180,8 +180,8 @@ ingress:
     - host: az.elk.juxtagene.com
       http:
         paths:
-        - pathType: Prefix
-          path: /
+        - path: /
+          pathType: Prefix
           backend:
             service:
               name: opensearch-dashboards
