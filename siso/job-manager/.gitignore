@@ -1,0 +1,5 @@
+apps/.cache
+apps/pkg
+apps/bin
+go.sum
+go.mod
