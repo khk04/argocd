@@ -178,15 +178,14 @@ ingress:
 
   hosts:
     - host: az.elk.juxtagene.com
-      http:
-        paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: opensearch-dashboards
-              port:
-                number: 5601
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: opensearch-dashboards
+            port:
+              number: 5601
   tls:
   - hosts:
     - az.elk.juxtagene.com
