@@ -172,6 +172,7 @@ ingress:
   annotations: 
     cert-manager.io/cluster-issuer: letsencrypt-prod-elk
     cert-manager.io/acme-challenge-type: http01
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
   labels: {}
   hosts:
     - host: az.elk.juxtagene.com
