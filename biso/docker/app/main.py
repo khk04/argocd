@@ -247,14 +247,14 @@ async def send_to_elasticsearch(data: dict):
     for result in search_results:
         if 'log' not in result['_source']:
             try:
-                log_data = log_data+ result['_source']['endlog']
-            except:
+                log_data = log_data + result['_source']['endlog']
+            except KeyError:
                 log_data = "there are no log data" + "\n"
         else:
-            log_data = log_data+ result['_source']['log']
+            log_data = log_data + result['_source']['log']
         if 'endlog' in result['_source']:
             log_data = result['_source']['endlog']
-        progress = result['_source']['progress']
+        progress = result['_source'].get('progress', None)
     log_data = log_data.replace("\n", "\n\r")
     # 응답을 반환합니다.
     return {"status_code": response.status_code, "content": log_data, "progress": progress}
