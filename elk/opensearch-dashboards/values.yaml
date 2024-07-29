@@ -174,20 +174,23 @@ ingress:
     cert-manager.io/acme-challenge-type: http01
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
   labels: {}
-  hosts:
+  spec:
+    ingressClassName: nginx
+  rule:
     - host: az.elk.juxtagene.com
-      paths:
-        - path: /
+      http:
+        paths:
+        - pathType: Prefix
+          path: /
           backend:
-            serviceName: ""
-            servicePort: ""
+            service:
+              name: opensearch-dashboards
+              port:
+                number: 5601
   tls:
-    - secretName: az-elk-juxtagene-com-tls
-      hosts:
-        - az.elk.juxtagene.com
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  - hosts:
+    - az.elk.juxtagene.com
+    secretName: az-elk-juxtagene-com-tls
 
 resources:
   requests:
