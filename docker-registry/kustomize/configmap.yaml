@@ -6,4 +6,4 @@ metadata:
   namespace: docker
 data:
   htpasswd: |
-    juxtagene:$2y$05$Fz9nj4NMXhfyObtRSkOyeez6GjEkPYGlimZVJfIax29EJ/jJKo6t6
+    juxtagene:$2y$05$RgHf2/PsHUc8RrQouSOfCusMHmywEnSjNDyVj.H2e99ktq5edyo.y
