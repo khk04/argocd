@@ -18,4 +18,16 @@ msg() {
 
 setup_colors
 
-VER="1.0.0"
+cd certmanager/
+
+./deploy-apply.sh
+
+cd -
+
+
+cd argocd/cli
+
+./deploy-apply-argocd.sh
+
+cd -
+

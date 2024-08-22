@@ -54,6 +54,9 @@ issuers=(
   "letsencrypt-prod-kafka   kafka	  khkraining@juxtagene.com"
   "letsencrypt-prod-elk     elk     khkraining@juxtagene.com"
   "letsencrypt-prod-argocd  argocd  khkraining@juxtagene.com"
+  "letsencrypt-prod-allso   allso  khkraining@juxtagene.com"
+  "letsencrypt-prod-miso    miso  khkraining@juxtagene.com"
+  "letsencrypt-prod-biso    biso  khkraining@juxtagene.com"
 )
 
 for issuer in "${issuers[@]}"; do
