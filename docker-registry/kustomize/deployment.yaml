@@ -1,0 +1,72 @@
+# deployment for dev-docker repo
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-registry-service
+  namespace: docker
+  labels:
+    app: docker-registry-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docker-registry-service
+  template:
+    metadata:
+      labels:
+        app: docker-registry-service
+    spec:
+      volumes:
+      # - name: registry-data-volume
+      #   persistentVolumeClaim: 
+      #     claimName: docker-storage-pvc
+      - name: htpasswd-volume
+        configMap:
+          name: htpasswd-volume-cm
+      containers:
+        - image: registry:2.7.0
+          name: docker-registry-service
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: REGISTRY_AUTH
+            value: "htpasswd"
+          - name: REGISTRY_AUTH_HTPASSWD_REALM
+            value: "Registry Realm"
+          - name: REGISTRY_AUTH_HTPASSWD_PATH
+            value: "/auth/htpasswd"
+          - name: REGISTRY_STORAGE_DELETE_ENABLED
+            value: "true"
+          ports:
+            - name: docker-port
+              containerPort: 5000 
+          volumeMounts:
+          # - mountPath: /var/lib/registry
+          #   name: registry-data-volume
+          - mountPath: /auth
+            name: htpasswd-volume
+          resources:
+            limits:
+              cpu: "0.5"
+              memory: "512Mi"
+            requests:
+              cpu: "0.1"
+              memory: "256Mi"
+        - image: joxit/docker-registry-ui:2.0
+          name: registry-ui
+          ports:
+          - name: http
+            containerPort: 80
+          env:
+          - name: REGISTRY_URL
+            value: "https://az.docker.juxtagene.com"
+          - name: DELETE_IMAGES
+            value: "true"
+          - name: SINGLE_REGISTRY
+            value: "true"
+          resources:
+            limits:
+              cpu: "0.5"
+              memory: "256Mi"
+            requests:
+              cpu: "0.1"
+              memory: "128Mi"

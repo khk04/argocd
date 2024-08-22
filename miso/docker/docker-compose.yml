@@ -1,0 +1,42 @@
+#
+# 이 파일은 도커를 관리하는 파일입니다. 
+#
+version: '2'
+services:
+    miso-services-frontend-api-server-dev:
+        build:
+            context: ./development
+            dockerfile: Dockerfile
+        image: services/miso-frontend-api-server-dev:latest
+
+    miso-services-frontend-api-server-build:
+        build:
+            context: ./development
+            dockerfile: Dockerfile
+        image: services/miso-frontend-api-server-dev:latest
+        volumes:
+          - ${selected_directory}:/app
+        ports:
+          - 8082:8080
+        working_dir: /app
+        command: >
+          bash -c "npm install && rm -rf /app/dist/ && npm run build"
+
+    miso-services-frontend-api-server:
+      build:
+        context: ./deployment
+        dockerfile: Dockerfile
+      image: services/miso-frontend-api-server:latest
+
+    miso-services-frontend-api-server-init:
+        build:
+            context: ./development
+            dockerfile: Dockerfile
+        image: services/miso-frontend-api-server-dev:latest
+        volumes:
+          - ${selected_directory}:/app
+        ports:
+          - 8082:8080
+        working_dir: /app
+        command: >
+          bash -c "vue create -d -f new" 

@@ -1,0 +1,9 @@
+# kustomization.yaml
+namespace: miso
+resources:
+- deployment.yaml
+- service.yaml
+- ingress.yaml
+- docker-registry.yaml
+- namespace.yaml
+- issuer.yaml

@@ -1,0 +1,7 @@
+# kustomization.yaml
+namespace: allso
+resources:
+- deployment.yaml
+- service.yaml
+- ingress.yaml
+- issuer.yaml

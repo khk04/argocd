@@ -1,0 +1,16 @@
+fastapi 
+uvicorn
+xmltodict
+jsons
+numpy
+kafka-python==2.0.2
+httpx
+redis
+pyjwt==2.3.0
+requests
+python-ldap
+
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+
+python-multipart

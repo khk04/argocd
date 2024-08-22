@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend
+  namespace: miso
+  annotations:
+    # nginx.org/websocket-services: "frontend"
+    # nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    # nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    # nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    cert-manager.io/issuer: letsencrypt-prod-miso
+    cert-manager.io/acme-challenge-type: http01
+spec:
+  rules:
+  - host: az.miso.juxtagene.com
+    http:
+      paths:
+        - backend:
+            service:
+              name: frontend
+              port:
+                number: 80
+          path: /
+          pathType: Prefix
+  tls:
+  - hosts:
+    - az.miso.juxtagene.com
+    secretName: az-miso-juxtagene-com-tls

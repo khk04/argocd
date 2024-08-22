@@ -1,0 +1,36 @@
+#
+# author : kim hyun-ki <khkraining@falinux.com>
+# Create on : 2020. 09. 15.
+# modify    : 2024. 07. 25.
+# Description : service name change
+#
+version: '2'
+services: 
+
+    build-go-ds:
+        build:
+            context     : ./development
+            dockerfile  : Dockerfile
+
+        image           : base/go-amd64-ds:0.1
+        container_name  : base-go-amd64-ds:0.1
+        volumes         :
+            - ../apps/:/work
+        network_mode    : "host"
+        privileged      : false
+        environment     :
+            GOOS        : linux
+            GOARCH      : amd64
+            GOPATH      : /work
+            GO111MODULE : 'on'
+#            GOCACHE     : 'off'
+        command         : bash
+        user: "${UID}:${GID}"
+
+    base-go-amd64-ds:
+        build:
+            context     : ./development
+            dockerfile  : Dockerfile
+        image           : base/go-amd64-ds:0.1
+
+

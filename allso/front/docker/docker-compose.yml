@@ -1,0 +1,43 @@
+#
+# 이 파일은 도커를 관리하는 파일입니다. 
+#
+version: '2'
+services:
+    allso-services-frontend-monitor-dev:
+        build:
+            context: ./development
+            dockerfile: Dockerfile
+        image: services/allso-frontend-monitor-dev:latest
+
+    allso-services-frontend-monitor-build:
+        build:
+            context: ./development
+            dockerfile: Dockerfile
+        image: services/allso-frontend-monitor-dev:latest
+        volumes:
+          - ${selected_directory}:/app
+        ports:
+          - 8082:8080
+        working_dir: /app
+        command: >
+          bash -c "npm install --force && rm -rf /app/dist/ && npm run build"
+
+    allso-services-frontend-monitor:
+      build:
+        context: ./deployment
+        dockerfile: Dockerfile
+      image: services/allso-frontend-monitor:latest
+
+    allso-services-frontend-monitor-init:
+        build:
+            context: ./development
+            dockerfile: Dockerfile
+        image: services/allso-frontend-monitor-dev:latest
+        user: "${USER_ID}:${GROUP_ID}"
+        volumes:
+          - ${selected_directory}:/app
+        ports:
+          - 8082:8080
+        working_dir: /app
+        command: >
+          bash -c "vue create -d -f new" 

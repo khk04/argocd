@@ -1,0 +1,9 @@
+# secret for dev-docker repo
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: htpasswd-volume-cm
+  namespace: docker
+data:
+  htpasswd: |
+    juxtagene:$2y$05$Fz9nj4NMXhfyObtRSkOyeez6GjEkPYGlimZVJfIax29EJ/jJKo6t6

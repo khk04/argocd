@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: wisdom
+spec:
+  type: ClusterIP
+  selector:
+    workload.user.cattle.io/workloadselector: frontend-api-server
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    name: http

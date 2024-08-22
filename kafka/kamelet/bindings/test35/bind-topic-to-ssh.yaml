@@ -1,0 +1,23 @@
+apiVersion: camel.apache.org/v1alpha1
+kind: KameletBinding
+metadata:
+  name: bind-kafka-ssh-test35
+spec:
+  source:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: kafka-source-test35
+    properties:
+      bootstrapServers: "kafka:9092"
+      topic: test35
+  sink:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: ssh-sink-test35
+    properties:
+      connectionHost: "10.10.120.2"
+      connectionPort: 22
+      password: "rocky"
+      username: "rocky"

@@ -1,0 +1,61 @@
+# ingress for dev-docker rep
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: docker-registry-service
+  namespace: docker
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/proxy-body-size: 5G
+    cert-manager.io/issuer: letsencrypt-prod-docker
+    cert-manager.io/acme-challenge-type: http01
+    # single sign-on
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://az.dui.juxtagene.com"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, PUT, POST, DELETE, PATCH, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "Authorization, Content-Type"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+spec:
+  rules:
+  - host: az.docker.juxtagene.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: docker-registry-service
+            port:
+              number: 5000
+  tls:
+  - hosts:
+    - az.docker.juxtagene.com
+    secretName: docker-juxtagene-com-tls
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: registry-ui
+  namespace: docker
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/proxy-body-size: 5G
+    cert-manager.io/issuer: letsencrypt-prod-docker-ui
+    cert-manager.io/acme-challenge-type: http01
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+spec:
+  rules:
+  - host: az.dui.juxtagene.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: registry-ui
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - az.dui.juxtagene.com
+    secretName: dui-juxtagene-com-tls

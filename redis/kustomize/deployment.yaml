@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-redis-publisher
+  namespace: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-redis-publisher
+  template:
+    metadata:
+      labels:
+        app: kafka-redis-publisher
+    spec:
+      containers:
+      - name: kafka-redis-publisher-container
+        image: az.docker.juxtagene.com/services/kafka-redis-publisher:latest
+        env:
+        - name: TZ
+          value: Asia/Seoul
+        - name: REDIS_HOST
+          value: job-redis-master-0
+        - name: REDIS_PORT
+          value: "6379"
+        - name: KAFKA_HOST
+          value: kafka.kafka
+        - name: KAFKA_PORT
+          value: "9092"
+        - name: KAFKA_TOPIC
+          value: "job_state"
+      imagePullSecrets:
+        - name: juxtagene-docker-registry

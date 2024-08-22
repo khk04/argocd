@@ -1,0 +1,23 @@
+apiVersion: camel.apache.org/v1alpha1
+kind: KameletBinding
+metadata:
+  name: ssh-sink-binding01
+spec:
+  source:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: kafka-ssh-topic
+    properties:
+      bootstrapServers: "kafka:9092"
+      topic: test-ssh02
+  sink:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: ssh-sink
+    properties:
+      connectionHost: ""
+      connectionPort: 22
+      password: ""
+      username: ""
