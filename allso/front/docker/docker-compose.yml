@@ -8,6 +8,13 @@ services:
             context: ./development
             dockerfile: Dockerfile
         image: services/allso-frontend-monitor-dev:latest
+        volumes:
+          - ${selected_directory}:/app
+        ports:
+          - 8082:8080
+        working_dir: /app
+        command: >
+          bash -c "yarn install ; yarn serve"
 
     allso-services-frontend-monitor-build:
         build:
