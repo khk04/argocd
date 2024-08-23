@@ -4,12 +4,9 @@ metadata:
   name: frontend
   namespace: monitor
   annotations:
-    nginx.org/websocket-services: "frontend"
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
     cert-manager.io/cluster-issuer: letsencrypt-prod-allso
     cert-manager.io/acme-challenge-type: http01
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   rules:
   - host: az.allso.juxtagene.com
