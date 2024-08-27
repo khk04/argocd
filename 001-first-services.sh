@@ -29,5 +29,11 @@ cd argocd/cli
 
 ./deploy-apply-argocd.sh
 
+./argocd-restore.sh
+
+./argocd-check-docker.sh
+
+
 cd -
+
 

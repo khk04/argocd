@@ -18,7 +18,26 @@ msg() {
 
 setup_colors
 
-./001-first-services.sh
-./002-build-docker-images.sh
-./003-apply-issuer.sh
-./004-argocd-pass-change.sh
+msg "${GREEN}Setting up the cert-manager...${NOFORMAT}"
+cd certmanager/
+
+./deploy-apply.sh
+
+cd -
+
+
+msg "${GREEN}Setting up the argocd...${NOFORMAT}"
+cd argocd/cli
+
+./deploy-apply-argocd.sh
+
+./argocd-restore.sh
+
+cd -
+
+msg "${GREEN}Setting up the issuer...${NOFORMAT}"
+./002-apply-issuer.sh
+
+
+msg "${GREEN}Building the docker images...${NOFORMAT}"
+./003-build-docker-images.sh

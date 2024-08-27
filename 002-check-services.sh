@@ -18,9 +18,4 @@ msg() {
 
 setup_colors
 
-cd argocd/cli
-
-./argocd-password-change.sh
-
-cd -
-
+KUBE_CONFIG="/Users/khk/work/juxtagene/quickstart/rancher/azure/kube_config_workload.yaml"
