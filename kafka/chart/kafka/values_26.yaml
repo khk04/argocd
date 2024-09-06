@@ -647,7 +647,7 @@ controller:
     type: ""
     ## @param controller.nodeAffinityPreset.key Node label key to match Ignored if `affinity` is set.
     ## E.g.
-    ## key: "kubernetes.io/e2e-az-name"
+    ## key: "kubernetes.io/e2e-name"
     ##
     key: ""
     ## @param controller.nodeAffinityPreset.values Node label values to match. Ignored if `affinity` is set.
@@ -1037,7 +1037,7 @@ broker:
     type: ""
     ## @param broker.nodeAffinityPreset.key Node label key to match Ignored if `affinity` is set.
     ## E.g.
-    ## key: "kubernetes.io/e2e-az-name"
+    ## key: "kubernetes.io/e2e-name"
     ##
     key: ""
     ## @param broker.nodeAffinityPreset.values Node label values to match. Ignored if `affinity` is set.
@@ -1786,7 +1786,7 @@ metrics:
       type: ""
       ## @param metrics.kafka.nodeAffinityPreset.key Node label key to match Ignored if `metrics.kafka.affinity` is set.
       ## E.g.
-      ## key: "kubernetes.io/e2e-az-name"
+      ## key: "kubernetes.io/e2e-name"
       ##
       key: ""
       ## @param metrics.kafka.nodeAffinityPreset.values Node label values to match. Ignored if `metrics.kafka.affinity` is set.

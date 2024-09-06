@@ -9,7 +9,7 @@ metadata:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   rules:
-  - host: az.allso.juxtagene.com
+  - host: allso.juxtagene.com
     http:
       paths:
         - backend:
@@ -21,5 +21,5 @@ spec:
           pathType: Prefix
   tls:
   - hosts:
-    - az.allso.juxtagene.com
-    secretName: az-allso-juxtagene-com-tls
+    - allso.juxtagene.com
+    secretName: allso-juxtagene-com-tls

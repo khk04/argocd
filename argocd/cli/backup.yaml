@@ -245,9 +245,9 @@ status:
   sourceType: Kustomize
   summary:
     externalURLs:
-    - https://az.allso.juxtagene.com/
+    - https://allso.juxtagene.com/
     images:
-    - az.docker.juxtagene.com/services/allso-frontend-monitor:latest
+    - docker.juxtagene.com/services/allso-frontend-monitor:latest
     - busybox
   sync:
     comparedTo:
@@ -424,9 +424,9 @@ status:
   sourceType: Kustomize
   summary:
     externalURLs:
-    - https://az.biso.juxtagene.com/
+    - https://biso.juxtagene.com/
     images:
-    - az.docker.juxtagene.com/services/biso-backend-api-server:latest
+    - docker.juxtagene.com/services/biso-backend-api-server:latest
     - busybox
   sync:
     comparedTo:
@@ -769,8 +769,8 @@ status:
   sourceType: Kustomize
   summary:
     externalURLs:
-    - https://az.docker.juxtagene.com/
-    - https://az.dui.juxtagene.com/
+    - https://docker.juxtagene.com/
+    - https://dui.juxtagene.com/
     images:
     - joxit/docker-registry-ui:2.0
     - registry:2.7.0
@@ -1291,7 +1291,7 @@ status:
   sourceType: Helm
   summary:
     externalURLs:
-    - https://az.elk.juxtagene.com/
+    - https://elk.juxtagene.com/
     images:
     - opensearchproject/opensearch-dashboards:2.6.0
   sync:
@@ -1761,7 +1761,7 @@ status:
   sourceType: Helm
   summary:
     externalURLs:
-    - https://az.kafka.juxtagene.com/
+    - https://kafka.juxtagene.com/
     images:
     - docker.io/provectuslabs/kafka-ui:v0.6.0
   sync:
@@ -1944,9 +1944,9 @@ status:
   sourceType: Kustomize
   summary:
     externalURLs:
-    - https://az.miso.juxtagene.com/
+    - https://miso.juxtagene.com/
     images:
-    - az.docker.juxtagene.com/services/miso-frontend-api-server:latest
+    - docker.juxtagene.com/services/miso-frontend-api-server:latest
     - busybox
   sync:
     comparedTo:
@@ -2305,7 +2305,7 @@ status:
   sourceType: Kustomize
   summary:
     images:
-    - az.docker.juxtagene.com/services/kafka-redis-publisher:latest
+    - docker.juxtagene.com/services/kafka-redis-publisher:latest
   sync:
     comparedTo:
       destination:

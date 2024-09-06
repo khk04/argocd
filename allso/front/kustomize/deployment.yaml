@@ -26,7 +26,7 @@ spec:
           - ls -al 
       containers:
       - name: frontend
-        image: az.docker.juxtagene.com/services/allso-frontend-monitor:latest
+        image: docker.juxtagene.com/services/allso-frontend-monitor:latest
         imagePullPolicy: Always
         resources: {}
         securityContext:

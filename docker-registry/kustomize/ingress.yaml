@@ -11,13 +11,13 @@ metadata:
     cert-manager.io/acme-challenge-type: http01
     # single sign-on
     nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "https://az.dui.juxtagene.com"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://dui.juxtagene.com"
     nginx.ingress.kubernetes.io/cors-allow-methods: "GET, PUT, POST, DELETE, PATCH, OPTIONS"
     nginx.ingress.kubernetes.io/cors-allow-headers: "Authorization, Content-Type"
     nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
 spec:
   rules:
-  - host: az.docker.juxtagene.com
+  - host: docker.juxtagene.com
     http:
       paths:
       - pathType: Prefix
@@ -29,7 +29,7 @@ spec:
               number: 5000
   tls:
   - hosts:
-    - az.docker.juxtagene.com
+    - docker.juxtagene.com
     secretName: docker-juxtagene-com-tls
 ---
 apiVersion: networking.k8s.io/v1
@@ -45,7 +45,7 @@ metadata:
     nginx.ingress.kubernetes.io/enable-cors: "true"
 spec:
   rules:
-  - host: az.dui.juxtagene.com
+  - host: dui.juxtagene.com
     http:
       paths:
       - pathType: Prefix
@@ -57,5 +57,5 @@ spec:
               number: 80
   tls:
   - hosts:
-    - az.dui.juxtagene.com
+    - dui.juxtagene.com
     secretName: dui-juxtagene-com-tls

@@ -58,7 +58,7 @@ spec:
             containerPort: 80
           env:
           - name: REGISTRY_URL
-            value: "https://az.docker.juxtagene.com"
+            value: "https://docker.juxtagene.com"
           - name: DELETE_IMAGES
             value: "true"
           - name: SINGLE_REGISTRY

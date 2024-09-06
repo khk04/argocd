@@ -26,7 +26,7 @@ spec:
           - ls -al 
       containers:
       - name: backend
-        image: az.docker.juxtagene.com/services/allso-backend-monitor:latest
+        image: docker.juxtagene.com/services/allso-backend-monitor:latest
         imagePullPolicy: Always
         resources: {}
         securityContext:

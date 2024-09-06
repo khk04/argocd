@@ -12,7 +12,7 @@ metadata:
     cert-manager.io/acme-challenge-type: http01
 spec:
   rules:
-  - host: az.miso.juxtagene.com
+  - host: miso.juxtagene.com
     http:
       paths:
         - backend:
@@ -24,5 +24,5 @@ spec:
           pathType: Prefix
   tls:
   - hosts:
-    - az.miso.juxtagene.com
-    secretName: az-miso-juxtagene-com-tls
+    - miso.juxtagene.com
+    secretName: miso-juxtagene-com-tls

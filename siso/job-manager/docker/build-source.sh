@@ -20,4 +20,4 @@ if [ "$(uname)" == 'Darwin' ]; then
 fi
 
 # exec example echo 
-# ./job-manager -D -d batch/ -r az.docker.juxtagene.com -id juxtagene -pw "xxxxxxxxx" -br 10.0.0.4:31091 -re 10.0.0.4:32001 -C "genie" -pbs "/opt/pbs"
+# ./job-manager -D -d batch/ -r docker.juxtagene.com -id juxtagene -pw "xxxxxxxxx" -br 10.0.0.4:31091 -re 10.0.0.4:32001 -C "genie" -pbs "/opt/pbs"

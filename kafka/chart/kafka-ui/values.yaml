@@ -119,14 +119,14 @@ ingress:
   pathType: "Prefix"  
 
   # The hostname for the Ingress
-  host: "az.kafka.juxtagene.com"
+  host: "kafka.juxtagene.com"
 
   # configs for Ingress TLS
   tls:
     # Enable TLS termination for the Ingress
     enabled: true
     # the name of a pre-created Secret containing a TLS private key and certificate
-    secretName: "az-kafka-juxtagene-com-tls"
+    secretName: "kafka-juxtagene-com-tls"
 
   # HTTP paths to add to the Ingress before the default path
   precedingPaths: []

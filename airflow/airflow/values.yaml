@@ -383,7 +383,7 @@ web:
   ##
   nodeAffinityPreset:
     ## e.g:
-    ## key: "kubernetes.io/e2e-az-name"
+    ## key: "kubernetes.io/e2e-name"
     ##
     key: ""
     type: ""
@@ -718,7 +718,7 @@ scheduler:
   ##
   nodeAffinityPreset:
     ## e.g:
-    ## key: "kubernetes.io/e2e-az-name"
+    ## key: "kubernetes.io/e2e-name"
     ##
     key: ""
     type: ""
@@ -1057,7 +1057,7 @@ worker:
   ##
   nodeAffinityPreset:
     ## e.g:
-    ## key: "kubernetes.io/e2e-az-name"
+    ## key: "kubernetes.io/e2e-name"
     ##
     key: ""
     type: ""
@@ -1738,7 +1738,7 @@ metrics:
     type: ""
     ## @param metrics.nodeAffinityPreset.key Node label key to match Ignored if `metrics.affinity` is set.
     ## E.g.
-    ## key: "kubernetes.io/e2e-az-name"
+    ## key: "kubernetes.io/e2e-name"
     ##
     key: ""
     ## @param metrics.nodeAffinityPreset.values Node label values to match. Ignored if `metrics.affinity` is set.

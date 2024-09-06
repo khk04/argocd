@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: az.argocd.juxtagene.com
+  - host: argocd.juxtagene.com
     http:
       paths:
       - pathType: Prefix
@@ -23,6 +23,6 @@ spec:
               number: 8080
   tls:
   - hosts:
-    - az.argocd.juxtagene.com
-    secretName: az-argocd-juxtagene-com-tls
+    - argocd.juxtagene.com
+    secretName: argocd-juxtagene-com-tls
 

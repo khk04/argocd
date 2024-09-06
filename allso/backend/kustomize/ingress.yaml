@@ -9,7 +9,7 @@ metadata:
     # nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
     # nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
     # nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "https://az.allso.juxtagene.com,https://localhost:8080"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://allso.juxtagene.com,https://localhost:8080"
     nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, OPTIONS"
     nginx.ingress.kubernetes.io/cors-allow-headers: "Content-Type,Authorization"
     cert-manager.k8s.io/cluster-issuer: letsencrypt-prod-allso-backend
@@ -17,7 +17,7 @@ metadata:
 
 spec:
   rules:
-  - host: az.allso-backend.juxtagene.com
+  - host: allso-backend.juxtagene.com
     http:
       paths:
         - backend:
@@ -29,6 +29,6 @@ spec:
           pathType: Prefix
   tls:
   - hosts:
-    - az.allso-backend.juxtagene.com
-    secretName: az-allso-backend-juxtagene-com-tls
+    - allso-backend.juxtagene.com
+    secretName: allso-backend-juxtagene-com-tls
 

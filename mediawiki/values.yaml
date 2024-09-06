@@ -75,7 +75,7 @@ ingress:
   extraPaths: []
   extraRules: []
   extraTls: []
-  hostname: az.wiki.juxtagene.com
+  hostname: wiki.juxtagene.com
   ingressClassName: ""
   path: /
   pathType: Prefix
@@ -535,7 +535,7 @@ mariadb:
       limits: {}
       requests: {}
 mediawikiEmail: khkraining@juxxtagene.com
-mediawikiHost: az.wiki.juxtagene.com
+mediawikiHost: wiki.juxtagene.com
 mediawikiName: 젝사젠 주식회사
 mediawikiPassword: juxtagene11!
 mediawikiSecret: ""

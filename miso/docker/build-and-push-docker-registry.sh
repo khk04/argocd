@@ -16,7 +16,7 @@ docker-compose build miso-services-frontend-api-server
 
 rm -rf deployment/html
 
-DOCKER_REG="az.docker.juxtagene.com"
+DOCKER_REG="docker.juxtagene.com"
 DOCKER_PATH="services"
 DOCKER_REG_USER="juxtagene"
 DOCKER_REG_PASSWORD="qwer1234"

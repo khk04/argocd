@@ -177,7 +177,7 @@ ingress:
   ingressClassName: nginx
 
   hosts:
-    - host: az.elk.juxtagene.com
+    - host: elk.juxtagene.com
       paths:
       - path: /
         pathType: Prefix
@@ -188,8 +188,8 @@ ingress:
               number: 5601
   tls:
   - hosts:
-    - az.elk.juxtagene.com
-    secretName: az-elk-juxtagene-com-tls
+    - elk.juxtagene.com
+    secretName: elk-juxtagene-com-tls
 
 resources:
   requests:
