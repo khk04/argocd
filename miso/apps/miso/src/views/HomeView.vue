@@ -693,7 +693,7 @@ export default {
           text: "작업을 수행하기 위한 환경 선택이 안되어 있습니다.",
         };
       } else if (data.selectImage === null) {
-        console.log("this.runImage === 'az.docker.juxtagene.com/null'");
+        console.log("this.runImage === 'docker.juxtagene.com/null'");
         console.log(this.runImage);
         this.alert = {
           view: true,
@@ -709,13 +709,13 @@ export default {
 
         this.job_status = { status: "", value: 0, color: "#E0E0E0" };
         this.$refs.consoleLogRef.clearTerminal();
-        this.hpc_data.docker_image = `az.docker.juxtagene.com/${this.selectImage}`;
+        this.hpc_data.docker_image = `docker.juxtagene.com/${this.selectImage}`;
         this.hpc_data.outfile_path = "/juxtagene/logs/pbs/out/";
         // this.uniqueNameGen(this.hpc_data.docker_image);
         this.uniqueNameGen();
         this.jobcommandGen();
-        // this.hpc_data.upload = "tmp/" + this.hpc_data.job_name + "/in/";
-        // this.hpc_data.download = "tmp/" + this.hpc_data.job_name + "/out/";
+        this.hpc_data.upload = "tmp/" + this.hpc_data.job_name + "/in/";
+        this.hpc_data.download = "tmp/" + this.hpc_data.job_name + "/out/";
         this.hpc_data.job_state = "ready";
         this.hpc_data.file_name1 = "null";
         this.hpc_data.file_name2 = "null";
@@ -786,7 +786,7 @@ export default {
 
       this.job_status = { status: "", value: 0, color: "#E0E0E0" };
       this.$refs.consoleLogRef.clearTerminal();
-      this.hpc_data.docker_image = `az.docker.juxtagene.com/${this.selectImage}`;
+      this.hpc_data.docker_image = `docker.juxtagene.com/${this.selectImage}`;
       this.hpc_data.outfile_path = "/juxtagene/logs/pbs/out/";
       this.hpc_data.job_state = "ready";
       // this.uniqueNameGen(this.hpc_data.docker_image);
@@ -826,6 +826,7 @@ export default {
         file_name2: this.hpc_data.file_name2,
         file_name3: this.hpc_data.file_name3,
         job_control: this.hpc_data.job_control,
+        upload: this.hpc_data.upload,
       };
 
       await this.updateJob(ready_job);
