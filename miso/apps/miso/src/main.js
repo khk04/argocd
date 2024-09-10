@@ -4,7 +4,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-axios.defaults.baseURL = "https://az.biso.juxtagene.com";
+axios.defaults.baseURL = "https://biso.juxtagene.com";
 const app = createApp(App);
 app.config.globalProperties.$axios = axios;
 
